@@ -7,13 +7,66 @@ environment:
   sdk: '>=3.4.4 <4.0.0'
 
 dependencies:
+  cached_network_image: ^3.4.0
   flutter:
     sdk: flutter
+  flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.0.10+1
+  google_fonts: ^6.2.1
 
 dev_dependencies:
+  flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+    - assets/svgs/
+    - assets/videos/
+    - assets/audio/
+    - assets/fonts/Roboto/
+    - assets/fonts/cookie/
+    - assets/fonts/gilroy/
+  fonts:
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/gilroy/Gilroy-Black.ttf
+          weight: 900
+        - asset: assets/fonts/gilroy/Gilroy-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/gilroy/Gilroy-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/gilroy/Gilroy-UltraLight.ttf
+          weight: 200
+        - asset: assets/fonts/gilroy/Gilroy-Light.ttf
+          weight: 300
+        - asset: assets/fonts/gilroy/Gilroy-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/gilroy/Gilroy-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/gilroy/Gilroy-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/gilroy/Gilroy-Thin.ttf
+          weight: 100  
+    - family: Cookie
+      fonts:
+        - asset: assets/fonts/cookie/Cookie-Regular.ttf
+    - family: Roboto
+      fonts:
+          - asset: assets/fonts/Roboto/Roboto-Regular.ttf
+            weight: 400
+          - asset: assets/fonts/Roboto/Roboto-Bold.ttf
+            weight: 700
+          - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+            weight: 500
+          - asset: assets/fonts/Roboto/Roboto-Light.ttf
+            weight: 300
+          - asset: assets/fonts/Roboto/Roboto-Thin.ttf
+            weight: 100
+          - asset: assets/fonts/Roboto/Roboto-Black.ttf
+            weight: 900
+          
+

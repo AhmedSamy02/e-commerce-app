@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:simple_ecommerce/core/constants/screens.dart';
+import 'package:simple_ecommerce/features/landing_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,11 +12,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+    return ScreenUtilInit(
+      child: MaterialApp(
+        theme: ThemeData(
+          fontFamily: 'Gilroy',
+          
         ),
+        routes: {
+          kLandingScreen: (context) => const LandingScreen(),
+        },
+        initialRoute: kLandingScreen,
       ),
     );
   }
