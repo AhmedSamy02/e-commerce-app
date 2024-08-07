@@ -20,11 +20,12 @@ class LandingScreen extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding:  EdgeInsets.only(bottom:  0.12.sh),
+              padding: EdgeInsets.only(bottom: 0.1.sh),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SvgPicture.asset(kWhiteCarrot),
+                  SvgPicture.asset(kWhiteCarrotAsset),
+                  SizedBox(height: 20.h),
                   SizedBox(
                     width: 165.w,
                     child: Text(
@@ -43,17 +44,18 @@ class LandingScreen extends StatelessWidget {
                       'Get your groceries in as fast as one hour',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 13.sp,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w200,
                         color: Colors.white54,
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 30.h),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: kMainGreen,
                       padding: EdgeInsets.symmetric(
-                        horizontal: 0.32.sw,
+                        horizontal: 0.3.sw,
                         vertical: 0.02.sh,
                       ),
                     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simple_ecommerce/core/constants/screens.dart';
+import 'package:simple_ecommerce/features/auth/presentation/screens/login_screen.dart';
 import 'package:simple_ecommerce/features/landing_screen.dart';
 
 void main() {
@@ -14,14 +15,15 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Gilroy',
-          
         ),
         routes: {
           kLandingScreen: (context) => const LandingScreen(),
+          kLoginScreen: (context) => const LoginScreen(),
         },
-        initialRoute: kLandingScreen,
+        initialRoute: kLoginScreen,
       ),
     );
   }
