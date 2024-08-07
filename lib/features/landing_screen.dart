@@ -60,7 +60,7 @@ class LandingScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, kLoginScreen);
+                      Navigator.pushReplacementNamed(context, kLoginScreen);
                     },
                     child: Text(
                       'Get Started',
