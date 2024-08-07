@@ -25,10 +25,16 @@ Future<void> showLoadingQuickAlert(
       title: title ?? 'Loading',
       text: body ?? 'Please wait while we are processing your request');
 }
-Future<void>showErrorQuickAlert(BuildContext context, String? title, String? body) async {
+
+Future<void> showErrorQuickAlert(
+    BuildContext context, String? title, String? body) async {
   await QuickAlert.show(
       context: context,
       type: QuickAlertType.error,
       title: title ?? 'Error',
       text: body ?? 'An error has occured');
+}
+
+bool checkName(String text) {
+  return RegExp(r"^[A-Za-z][A-Za-z'-]{0,24}$").hasMatch(text);
 }

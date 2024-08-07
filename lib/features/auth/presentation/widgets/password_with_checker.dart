@@ -16,6 +16,7 @@ class _PasswordWithCheckerState extends State<PasswordWithChecker> {
     return PasswordStrengthFormChecker(
       textFormFieldConfiguration: TextFormFieldConfiguration(
         textInputAction: TextInputAction.done,
+        controller: widget.controller,
         obscureText: obscureText,
         decoration: InputDecoration(
           labelText: 'Password',
@@ -39,7 +40,7 @@ class _PasswordWithCheckerState extends State<PasswordWithChecker> {
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.r),
             borderSide: BorderSide(
-              color: Colors.green[900]!,
+              color: Colors.red,
               width: 1.sp,
             ),
           ),

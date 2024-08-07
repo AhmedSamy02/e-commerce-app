@@ -6,13 +6,19 @@ class AuthTextFormField extends StatelessWidget {
       {super.key,
       required this.labelText,
       this.hintText,
-      required this.controller});
+      required this.controller,
+      this.validator,
+      this.autovalidateMode});
   final String labelText;
   final String? hintText;
   final TextEditingController controller;
+  final String? Function(String? value)? validator;
+  final AutovalidateMode? autovalidateMode;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode: autovalidateMode,
+      validator: validator,
       controller: controller,
       textInputAction: TextInputAction.next,
       cursorColor: Colors.green[900],
@@ -25,7 +31,7 @@ class AuthTextFormField extends StatelessWidget {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
           borderSide: BorderSide(
-            color: Colors.green[900]!,
+            color: Colors.red,
             width: 1.sp,
           ),
         ),

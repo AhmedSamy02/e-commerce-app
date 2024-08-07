@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmailTextFormField extends StatefulWidget {
-  const EmailTextFormField({super.key});
-
+  const EmailTextFormField(
+      {super.key, required this.controller, this.autovalidateMode});
+  final TextEditingController controller;
+  final AutovalidateMode? autovalidateMode;
   @override
   State<EmailTextFormField> createState() => _EmailTextFormFieldState();
 }
@@ -15,16 +17,26 @@ class _EmailTextFormFieldState extends State<EmailTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onFieldSubmitted: (value) {
-        isValid = EmailValidator.validate(value);
+      controller: widget.controller,
+      autovalidateMode: widget.autovalidateMode,
+      onFieldSubmitted: (value) async {
+        isValid = value.isNotEmpty && EmailValidator.validate(value);
         shown = true;
         setState(() {});
       },
       validator: (value) {
         if (value == null || value.isEmpty) {
+          isValid = value != null &&
+              value.isNotEmpty &&
+              EmailValidator.validate(value);
+          shown = true;
+          setState(() {});
           return 'Email is required';
         }
         if (!EmailValidator.validate(value)) {
+          isValid = value.isNotEmpty && EmailValidator.validate(value);
+          shown = true;
+          setState(() {});
           return 'Invalid email';
         }
         return null;
@@ -41,7 +53,7 @@ class _EmailTextFormFieldState extends State<EmailTextFormField> {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
           borderSide: BorderSide(
-            color: Colors.green[900]!,
+            color: Colors.red,
             width: 1.sp,
           ),
         ),
