@@ -29,7 +29,7 @@ class MainApp extends StatelessWidget {
           kHomeScreen: (context) => const HomeScreen(),
           kRegisterScreen: (context) => const RegisterScreen(),
         },
-        initialRoute: kLoginScreen,
+        initialRoute: kHomeScreen,
       ),
     );
   }
