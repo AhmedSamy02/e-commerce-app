@@ -3,9 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simple_ecommerce/core/constants/colors.dart';
 
 class ItemsCountRow extends StatefulWidget {
-  const ItemsCountRow({super.key, required this.controller, this.maxNumber});
+  const ItemsCountRow(
+      {super.key, required this.controller, this.maxNumber, this.onChanged});
   final TextEditingController controller;
   final int? maxNumber;
+  final void Function(String value)? onChanged;
   @override
   State<ItemsCountRow> createState() => _ItemsCountRowState();
 }
@@ -39,14 +41,15 @@ class _ItemsCountRowState extends State<ItemsCountRow> {
           },
         ),
         SizedBox(
-          width: 35.w,
-          height: 35.h,
+          width: 25.w,
+          height: 32.h,
           child: TextFormField(
             controller: widget.controller,
+            onChanged: widget.onChanged,
+            readOnly: true,
             textAlign: TextAlign.center,
             decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(0),
-                border: InputBorder.none),
+                contentPadding: EdgeInsets.all(0), border: InputBorder.none),
           ),
         ),
         IconButton(

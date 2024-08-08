@@ -8,7 +8,9 @@ import 'package:simple_ecommerce/core/constants/values.dart';
 import 'package:simple_ecommerce/features/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:simple_ecommerce/features/auth/data/repositories/auth_repositoriy.dart';
 import 'package:simple_ecommerce/features/auth/domain/repositories/auth_repository.dart';
+import 'package:simple_ecommerce/features/cart/data/data_source/cart_local_data_source.dart';
 import 'package:simple_ecommerce/features/cart/data/models/cart.dart';
+import 'package:simple_ecommerce/features/cart/data/repositories/cart_repo_impl.dart';
 import 'package:simple_ecommerce/features/shop/data/data_source/shop_local_data_source.dart';
 import 'package:simple_ecommerce/features/shop/data/data_source/shop_remote_data_source.dart';
 import 'package:simple_ecommerce/features/shop/data/models/category.dart';
@@ -22,7 +24,7 @@ Future<void> initializeHive() async {
   Hive.registerAdapter<Category>(CategoryAdapter());
   Hive.registerAdapter<Cart>(CartAdapter());
   await Hive.openBox<Product>(kShopBox);
-  await Hive.openBox<Product>(kCartBox);
+  await Hive.openBox<Cart>(kCartBox);
 }
 
 void initializeLocators() {
@@ -33,9 +35,17 @@ void initializeLocators() {
       remoteDataSource: AuthRemoteDataSourceImpl(dio: dio),
     ),
   );
-  getit.registerLazySingleton<ShopRepository>(() => ShopRepositoryImpl(
+  getit.registerLazySingleton<ShopRepository>(
+    () => ShopRepositoryImpl(
       remoteDataSource: ShopRemoteDataSourceImpl(dio: dio),
-      localDataSource: ShopLocalDataSourceImpl()));
+      localDataSource: ShopLocalDataSourceImpl(),
+    ),
+  );
+  getit.registerLazySingleton<CartRepositoryImpl>(
+    () => CartRepositoryImpl(
+      cartLocalDataSource: CartLocalDataSourceImpl(),
+    ),
+  );
 }
 
 void saveToProducts(List<Product> products, String boxName) async {

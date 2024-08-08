@@ -25,7 +25,10 @@ class ProductGridItem extends StatelessWidget {
         onTap: () {
           Navigator.of(context).pushNamed(
             kProductDetailsScreen,
-            arguments: product,
+            arguments: {
+              'product': product,
+              'controller': null,
+            },
           );
         },
         child: Column(
@@ -109,7 +112,9 @@ class ProductGridItem extends StatelessWidget {
                           SizedBox(
                               width: 38.w,
                               height: 35.h,
-                              child: const RoundedAddToCartButton()),
+                              child:  RoundedAddToCartButton(
+                                product: product,
+                              )),
                         ],
                       ),
                     )

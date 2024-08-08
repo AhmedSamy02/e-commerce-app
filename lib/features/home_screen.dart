@@ -4,6 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:simple_ecommerce/core/constants/assets.dart';
 import 'package:simple_ecommerce/core/constants/colors.dart';
+import 'package:simple_ecommerce/core/constants/values.dart';
+import 'package:simple_ecommerce/features/cart/data/repositories/cart_repo_impl.dart';
+import 'package:simple_ecommerce/features/cart/presentation/controllers/cart_cubit.dart';
+import 'package:simple_ecommerce/features/cart/presentation/screens/cart_screen.dart';
 import 'package:simple_ecommerce/features/shop/presentation/controllers/shop_cubit.dart';
 import 'package:simple_ecommerce/features/shop/presentation/screens/shop_screen.dart';
 
@@ -18,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final _pageController = PageController();
+    final pageController = PageController();
     final appBar = [
       AppBar(
         title: Text(
@@ -28,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             fontSize: 22.sp,
           ),
         ),
+        toolbarHeight: 0.04.sh,
         centerTitle: true,
       ),
       AppBar(
@@ -38,13 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
             fontSize: 22.sp,
           ),
         ),
+        toolbarHeight: 0.04.sh,
         centerTitle: true,
       ),
       null
     ];
     final List<Widget> homeBodies = [
-      ShopScreen(),
-      Placeholder(),
+      const ShopScreen(),
+      const CartScreen(),
       Placeholder(),
     ];
     return MultiBlocProvider(
@@ -52,11 +58,14 @@ class _HomeScreenState extends State<HomeScreen> {
         BlocProvider<ShopCubit>(
           create: (context) => ShopCubit(),
         ),
+        BlocProvider<CartCubit>(
+          create: (context) => CartCubit(getit.get<CartRepositoryImpl>())..getCart(),
+        )
       ],
       child: Scaffold(
         appBar: appBar[_currentIndex],
         body: PageView(
-          controller: _pageController,
+          controller: pageController,
           onPageChanged: (value) {
             setState(() {
               _currentIndex = value;
@@ -65,10 +74,15 @@ class _HomeScreenState extends State<HomeScreen> {
           children: homeBodies,
         ),
         bottomNavigationBar: BottomNavigationBar(
+          unselectedLabelStyle: TextStyle(
+            fontSize: 10.sp,
+            fontWeight: FontWeight.w900,
+            color: Colors.black,
+          ),
           currentIndex: _currentIndex,
           selectedItemColor: kMainGreen,
           onTap: (index) async {
-            await _pageController.animateToPage(index,
+            await pageController.animateToPage(index,
                 duration: const Duration(milliseconds: 700),
                 curve: Curves.easeInOut);
             setState(() {

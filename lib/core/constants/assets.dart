@@ -5,3 +5,5 @@ const kGroceriesAsset = 'assets/images/groceries.jpg';
 const kCartAsset = 'assets/icons/cart.svg';
 const kProfileAsset = 'assets/icons/profile.svg';
 const kShopAsset = 'assets/icons/shop.svg';
+const kFailedAlertAsset = 'assets/images/failed_alert.jpg';
+const kCartErrorAsset = 'assets/images/cart_error.jpg';

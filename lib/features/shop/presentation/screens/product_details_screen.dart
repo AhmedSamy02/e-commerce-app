@@ -13,12 +13,16 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({
     super.key,
+    this.countRowController,
   });
+  final TextEditingController? countRowController;
   @override
   Widget build(BuildContext context) {
     final PageController pageController = PageController();
-    final product = ModalRoute.of(context)!.settings.arguments as Product;
-    final controller = TextEditingController(text: '1');
+    final arguments =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final product =arguments['product'] as Product;
+    final controller = arguments['controller'] ?? TextEditingController(text: '1');
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -46,14 +50,14 @@ class ProductDetailsScreen extends StatelessWidget {
             Hero(
               tag: product.id,
               child: SizedBox(
-                height: 0.32.sh,
+                height: 0.35.sh,
                 child: PageView.builder(
                   controller: pageController,
                   itemCount: product.images.length,
                   itemBuilder: (context, index) {
                     return CachedNetworkImage(
                       imageUrl: product.images[index],
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       progressIndicatorBuilder: (context, url, progress) {
                         return const Center(
                           child: SpinKitThreeBounce(

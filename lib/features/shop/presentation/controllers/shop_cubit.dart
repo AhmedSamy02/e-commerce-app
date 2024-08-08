@@ -19,7 +19,6 @@ class ShopCubit extends Cubit<ShopState> {
   }
 
   Future<void> fetchPage(int pageKey) async {
-    logger.d('fetchPage: $pageKey');
     final response =
         await GetProductsUseCase(repository: getit.get<ShopRepository>())
             .call(pageKey, _pageSize);
