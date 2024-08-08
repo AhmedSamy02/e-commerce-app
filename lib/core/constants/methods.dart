@@ -10,13 +10,15 @@ import 'package:simple_ecommerce/features/auth/data/repositories/auth_repositori
 import 'package:simple_ecommerce/features/auth/domain/repositories/auth_repository.dart';
 import 'package:simple_ecommerce/features/shop/data/data_source/shop_local_data_source.dart';
 import 'package:simple_ecommerce/features/shop/data/data_source/shop_remote_data_source.dart';
+import 'package:simple_ecommerce/features/shop/data/models/category.dart';
 import 'package:simple_ecommerce/features/shop/data/models/product.dart';
 import 'package:simple_ecommerce/features/shop/data/repositories/shop_repo_impl.dart';
 import 'package:simple_ecommerce/features/shop/domain/repositories/shop_repo.dart';
 
 Future<void> initializeHive() async {
   await Hive.initFlutter();
-  Hive.registerAdapter(ProductAdapter());
+  Hive.registerAdapter<Product>(ProductAdapter());
+  Hive.registerAdapter<Category>(CategoryAdapter());
   await Hive.openBox<Product>(kShopBox);
 }
 
@@ -34,7 +36,7 @@ void initializeLocators() {
 }
 
 void saveToProducts(List<Product> products, String boxName) async {
-  var box =  Hive.box(boxName);
+  var box = Hive.box<Product>(boxName);
   box.addAll(products);
 }
 

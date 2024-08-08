@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:simple_ecommerce/core/constants/values.dart';
 import 'package:simple_ecommerce/features/shop/data/models/category.dart';
 part 'product.g.dart';
 
@@ -28,9 +29,9 @@ class Product {
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json['id'],
+      id: json['id'].toString(),
       title: json['title'],
-      price: json['price'],
+      price: (json['price'] as int).toDouble(),
       description: json['description'],
       category: Category.fromJson(json['category']),
       images: List<String>.from(json['images']),

@@ -14,7 +14,7 @@ class ShopRemoteDataSourceImpl implements ShopRemoteDataSource {
   @override
   Future<List<Product>> getProducts(int page, int limit) async {
     final response = await dio.get(
-      endpoint,
+      kProductsLink + endpoint,
       queryParameters: {
         'offset': page * limit,
         'limit': limit,
