@@ -24,7 +24,7 @@ class _ShopScreenState extends State<ShopScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(8.sp),
+      padding: EdgeInsets.all(18.sp),
       child: RefreshIndicator(
         onRefresh: () => Future.sync(
           () => BlocProvider.of<ShopCubit>(context).pagingController.refresh(),
@@ -35,8 +35,8 @@ class _ShopScreenState extends State<ShopScreen> {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 14.h,
-            crossAxisSpacing: 28.w,
-            childAspectRatio: 0.7.sp,
+            crossAxisSpacing: 38.w,
+            childAspectRatio: 0.58.sp,
           ),
           builderDelegate: PagedChildBuilderDelegate<Product>(
             itemBuilder: (context, item, index) => ProductGridItem(product: item),

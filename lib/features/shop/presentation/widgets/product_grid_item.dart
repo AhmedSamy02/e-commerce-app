@@ -34,7 +34,8 @@ class ProductGridItem extends StatelessWidget {
             Expanded(
               child: Hero(
                 tag: product.id,
-                child: Center(
+                child: SizedBox(
+                  width: double.infinity,
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20.r),
@@ -42,7 +43,7 @@ class ProductGridItem extends StatelessWidget {
                     ),
                     child: CachedNetworkImage(
                       imageUrl: product.images[0],
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                       progressIndicatorBuilder: (context, url, progress) {
                         return Center(
                             child: SpinKitThreeBounce(
