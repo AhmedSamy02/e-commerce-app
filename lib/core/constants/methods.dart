@@ -8,6 +8,7 @@ import 'package:simple_ecommerce/core/constants/values.dart';
 import 'package:simple_ecommerce/features/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:simple_ecommerce/features/auth/data/repositories/auth_repositoriy.dart';
 import 'package:simple_ecommerce/features/auth/domain/repositories/auth_repository.dart';
+import 'package:simple_ecommerce/features/cart/data/models/cart.dart';
 import 'package:simple_ecommerce/features/shop/data/data_source/shop_local_data_source.dart';
 import 'package:simple_ecommerce/features/shop/data/data_source/shop_remote_data_source.dart';
 import 'package:simple_ecommerce/features/shop/data/models/category.dart';
@@ -19,7 +20,9 @@ Future<void> initializeHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter<Product>(ProductAdapter());
   Hive.registerAdapter<Category>(CategoryAdapter());
+  Hive.registerAdapter<Cart>(CartAdapter());
   await Hive.openBox<Product>(kShopBox);
+  await Hive.openBox<Product>(kCartBox);
 }
 
 void initializeLocators() {

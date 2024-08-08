@@ -14,3 +14,4 @@ final logger = Logger(
 );
 final getit = GetIt.instance;
 const kShopBox = 'products';
+const kCartBox = 'cart';
