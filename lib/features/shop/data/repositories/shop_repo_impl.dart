@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:simple_ecommerce/core/errors/failure.dart';
@@ -19,13 +21,18 @@ class ShopRepositoryImpl implements ShopRepository {
       int page, int limit) async {
     List<Product> products;
     try {
-      products = await localDataSource.getProducts(page, limit);
-      if (products.isNotEmpty) {
-        return right(products);
-      }
       products = await remoteDataSource.getProducts(page, limit);
       return right(products);
     } on DioException catch (e) {
+      if ( e is TimeoutException) {
+        products = await localDataSource.getProducts(page, limit);
+        if (products.isNotEmpty) {
+          return right(products);
+        }
+        return left(
+          UnexpectedFailure(message: 'Server Timeout'),
+        );
+      }
       return left(ServerFailure.fromDio(e));
     } catch (e) {
       return left(UnexpectedFailure(message: e.toString()));

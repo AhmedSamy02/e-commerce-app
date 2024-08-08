@@ -52,7 +52,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return CachedNetworkImage(
                     imageUrl: product.images[index],
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                     progressIndicatorBuilder: (context, url, progress) {
                       return const Center(
                         child: SpinKitThreeBounce(

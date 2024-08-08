@@ -51,6 +51,14 @@ class ProductGridItem extends StatelessWidget {
                           size: 20.sp,
                         ));
                       },
+                      errorWidget: (context, url, error) {
+                        return Center(
+                          child: Icon(
+                            Icons.error,
+                            color: Colors.red,
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),

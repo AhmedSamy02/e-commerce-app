@@ -16,7 +16,7 @@ class ShopRemoteDataSourceImpl implements ShopRemoteDataSource {
     final response = await dio.get(
       kProductsLink + endpoint,
       queryParameters: {
-        'offset': page * limit,
+        'offset': page,
         'limit': limit,
       },
     );
