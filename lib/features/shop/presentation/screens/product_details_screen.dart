@@ -40,160 +40,162 @@ class ProductDetailsScreen extends StatelessWidget {
           },
         ),
       ),
-      body: Column(
-        children: [
-          Hero(
-            tag: product.id,
-            child: SizedBox(
-              height: 0.32.sh,
-              child: PageView.builder(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Hero(
+              tag: product.id,
+              child: SizedBox(
+                height: 0.32.sh,
+                child: PageView.builder(
+                  controller: pageController,
+                  itemCount: product.images.length,
+                  itemBuilder: (context, index) {
+                    return CachedNetworkImage(
+                      imageUrl: product.images[index],
+                      fit: BoxFit.fill,
+                      progressIndicatorBuilder: (context, url, progress) {
+                        return const Center(
+                          child: SpinKitThreeBounce(
+                            color: kMainGreen,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10.h),
+              child: SmoothPageIndicator(
                 controller: pageController,
-                itemCount: product.images.length,
-                itemBuilder: (context, index) {
-                  return CachedNetworkImage(
-                    imageUrl: product.images[index],
-                    fit: BoxFit.fill,
-                    progressIndicatorBuilder: (context, url, progress) {
-                      return const Center(
-                        child: SpinKitThreeBounce(
-                          color: kMainGreen,
-                        ),
-                      );
-                    },
-                  );
-                },
+                count: product.images.length,
+                effect: ExpandingDotsEffect(
+                  dotColor: Colors.grey,
+                  activeDotColor: kMainGreen,
+                  dotHeight: 6.h,
+                  dotWidth: 6.w,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 10.h),
-            child: SmoothPageIndicator(
-              controller: pageController,
-              count: product.images.length,
-              effect: ExpandingDotsEffect(
-                dotColor: Colors.grey,
-                activeDotColor: kMainGreen,
-                dotHeight: 6.h,
-                dotWidth: 6.w,
-              ),
+            /////////////////////////////////////////////////////////////////////
+            SizedBox(
+              height: 0.02.sh,
             ),
-          ),
-          /////////////////////////////////////////////////////////////////////
-          SizedBox(
-            height: 0.02.sh,
-          ),
-          /////////////////////////////////////////////////////////////////////
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.w),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 7,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product.title,
-                        style: TextStyle(
-                          fontSize: 22.sp,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      Text(
-                        product.category.name,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black38,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: LikeButton(
-                    size: 30.sp,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          /////////////////////////////////////////////////////////////////////
-          SizedBox(
-            height: 0.01.sh,
-          ),
-          /////////////////////////////////////////////////////////////////////
-          Padding(
-            padding: EdgeInsets.only(right: 8.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ItemsCountRow(controller: controller),
-                Padding(
-                  padding: EdgeInsets.only(right: 8.w),
-                  child: Text(
-                    '\$${product.price}',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          /////////////////////////////////////////////////////////////////////
-          SizedBox(
-            height: 0.02.sh,
-          ),
-          /////////////////////////////////////////////////////////////////////
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.sp),
-            child: Accordion(
-                headerBackgroundColor: Colors.white,
-                contentBorderColor: Colors.white,
-                rightIcon: Icon(
-                  Icons.keyboard_arrow_down,
-                  size: 30.sp,
-                ),
-                flipRightIconIfOpen: true,
-                scaleWhenAnimating: false,
+            /////////////////////////////////////////////////////////////////////
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14.w),
+              child: Row(
                 children: [
-                  AccordionSection(
-                      header: Text(
-                        'Product Details',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      contentHorizontalPadding: 0,
-                      content: SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          product.description,
+                  Expanded(
+                    flex: 7,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product.title,
                           style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.w800,
                           ),
                         ),
-                      )),
-                ]),
-          ),
-
-          SizedBox(
-            height: 0.02.sh,
-          ),
-          /////////////////////////////////////////////////////////////////////
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.w),
-            child: MainNormalButton(
-              text: 'Add to Basket',
-              onPressed: () {},
+                        Text(
+                          product.category.name,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black38,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: LikeButton(
+                      size: 30.sp,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )
-        ],
+            /////////////////////////////////////////////////////////////////////
+            SizedBox(
+              height: 0.01.sh,
+            ),
+            /////////////////////////////////////////////////////////////////////
+            Padding(
+              padding: EdgeInsets.only(right: 8.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ItemsCountRow(controller: controller),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.w),
+                    child: Text(
+                      '\$${product.price}',
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            /////////////////////////////////////////////////////////////////////
+            SizedBox(
+              height: 0.02.sh,
+            ),
+            /////////////////////////////////////////////////////////////////////
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.sp),
+              child: Accordion(
+                  headerBackgroundColor: Colors.white,
+                  contentBorderColor: Colors.white,
+                  rightIcon: Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 30.sp,
+                  ),
+                  flipRightIconIfOpen: true,
+                  scaleWhenAnimating: false,
+                  children: [
+                    AccordionSection(
+                        header: Text(
+                          'Product Details',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        contentHorizontalPadding: 0,
+                        content: SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            product.description,
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        )),
+                  ]),
+            ),
+
+            SizedBox(
+              height: 0.02.sh,
+            ),
+            /////////////////////////////////////////////////////////////////////
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: MainNormalButton(
+                text: 'Add to Basket',
+                onPressed: () {},
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
