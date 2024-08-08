@@ -1,12 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:simple_ecommerce/core/constants/models/user.dart';
 import 'package:simple_ecommerce/core/constants/values.dart';
 import 'package:simple_ecommerce/features/auth/data/data_source/auth_remote_data_source.dart';
 import 'package:simple_ecommerce/features/auth/data/repositories/auth_repositoriy.dart';
 import 'package:simple_ecommerce/features/auth/domain/repositories/auth_repository.dart';
+import 'package:simple_ecommerce/features/shop/data/models/product.dart';
+
+Future<void> initializeHive() async {
+  await Hive.initFlutter();
+}
 
 void initializeLocators() {
   final dio = Dio();
@@ -16,6 +22,11 @@ void initializeLocators() {
       remoteDataSource: AuthRemoteDataSourceImpl(dio: dio),
     ),
   );
+}
+
+Future<void> saveToProducts(List<Product> products, String boxName) async {
+  var box = await Hive.openBox(boxName);
+  box.addAll(products);
 }
 
 Future<void> showLoadingQuickAlert(

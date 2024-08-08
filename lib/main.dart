@@ -8,6 +8,7 @@ import 'package:simple_ecommerce/features/home_screen.dart';
 import 'package:simple_ecommerce/features/landing_screen.dart';
 
 void main() {
+  initializeHive();
   initializeLocators();
   runApp(const MainApp());
 }
