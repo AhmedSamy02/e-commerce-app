@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:simple_ecommerce/core/constants/assets.dart';
 import 'package:simple_ecommerce/core/constants/colors.dart';
+import 'package:simple_ecommerce/features/shop/presentation/controllers/shop_cubit.dart';
+import 'package:simple_ecommerce/features/shop/presentation/screens/shop_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -40,49 +43,56 @@ class _HomeScreenState extends State<HomeScreen> {
       null
     ];
     final List<Widget> homeBodies = [
-      Placeholder(),
+      ShopScreen(),
       Placeholder(),
       Placeholder(),
     ];
-    return Scaffold(
-      appBar: appBar[_currentIndex],
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (value) {
-          setState(() {
-            _currentIndex = value;
-          });
-        },
-        children: homeBodies,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        selectedItemColor: kMainGreen,
-        onTap: (index) async {
-          await _pageController.animateToPage(index,
-              duration: const Duration(milliseconds: 700),
-              curve: Curves.easeInOut);
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(kShopAsset),
-            label: 'Shop',
-            activeIcon: SvgPicture.asset(kShopAsset, color: kMainGreen),
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(kCartAsset),
-            label: 'Cart',
-            activeIcon: SvgPicture.asset(kCartAsset, color: kMainGreen),
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(kProfileAsset),
-            label: 'Profile',
-            activeIcon: SvgPicture.asset(kProfileAsset, color: kMainGreen),
-          ),
-        ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ShopCubit>(
+          create: (context) => ShopCubit(),
+        ),
+      ],
+      child: Scaffold(
+        appBar: appBar[_currentIndex],
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (value) {
+            setState(() {
+              _currentIndex = value;
+            });
+          },
+          children: homeBodies,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          selectedItemColor: kMainGreen,
+          onTap: (index) async {
+            await _pageController.animateToPage(index,
+                duration: const Duration(milliseconds: 700),
+                curve: Curves.easeInOut);
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(kShopAsset),
+              label: 'Shop',
+              activeIcon: SvgPicture.asset(kShopAsset, color: kMainGreen),
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(kCartAsset),
+              label: 'Cart',
+              activeIcon: SvgPicture.asset(kCartAsset, color: kMainGreen),
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(kProfileAsset),
+              label: 'Profile',
+              activeIcon: SvgPicture.asset(kProfileAsset, color: kMainGreen),
+            ),
+          ],
+        ),
       ),
     );
   }

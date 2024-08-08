@@ -9,7 +9,7 @@ import 'package:simple_ecommerce/core/constants/widgets/terms_of_conditions.dart
 import 'package:simple_ecommerce/features/auth/presentation/controllers/auth_cubit.dart';
 import 'package:simple_ecommerce/features/auth/presentation/controllers/auth_states.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_loading_button.dart';
-import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_normal_button.dart';
+import 'package:simple_ecommerce/core/constants/widgets/auth_normal_button.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_paragraph.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_row.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_text_form_field.dart';
@@ -116,7 +116,7 @@ class RegisterScreen extends StatelessWidget {
                             if (state is AuthLoading) {
                               return const AuthLoadingButton();
                             }
-                            return AuthNormalButton(
+                            return MainNormalButton(
                               text: 'Sign Up',
                               onPressed: () {
                                 BlocProvider.of<AuthCubit>(context).register(

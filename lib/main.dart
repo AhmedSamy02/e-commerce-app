@@ -6,9 +6,10 @@ import 'package:simple_ecommerce/features/auth/presentation/screens/login_screen
 import 'package:simple_ecommerce/features/auth/presentation/screens/register_screen.dart';
 import 'package:simple_ecommerce/features/home_screen.dart';
 import 'package:simple_ecommerce/features/landing_screen.dart';
+import 'package:simple_ecommerce/features/shop/presentation/screens/product_details_screen.dart';
 
-void main() {
-  initializeHive();
+void main()async {
+  await initializeHive();
   initializeLocators();
   runApp(const MainApp());
 }
@@ -29,6 +30,7 @@ class MainApp extends StatelessWidget {
           kLoginScreen: (context) => const LoginScreen(),
           kHomeScreen: (context) => const HomeScreen(),
           kRegisterScreen: (context) => const RegisterScreen(),
+          kProductDetailsScreen: (context) => const ProductDetailsScreen(),
         },
         initialRoute: kHomeScreen,
       ),

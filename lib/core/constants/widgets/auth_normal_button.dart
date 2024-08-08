@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simple_ecommerce/core/constants/colors.dart';
 
-class AuthNormalButton extends StatelessWidget {
-  const AuthNormalButton({super.key, required this.text, this.onPressed});
+class MainNormalButton extends StatelessWidget {
+  const MainNormalButton({super.key, required this.text, this.onPressed});
   final String text;
   final void Function()? onPressed;
   @override

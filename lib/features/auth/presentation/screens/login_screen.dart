@@ -7,7 +7,7 @@ import 'package:simple_ecommerce/core/constants/screens.dart';
 import 'package:simple_ecommerce/features/auth/presentation/controllers/auth_cubit.dart';
 import 'package:simple_ecommerce/features/auth/presentation/controllers/auth_states.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_loading_button.dart';
-import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_normal_button.dart';
+import 'package:simple_ecommerce/core/constants/widgets/auth_normal_button.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_paragraph.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_row.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_text_form_field.dart';
@@ -63,8 +63,8 @@ class LoginScreen extends StatelessWidget {
                             onPressed: () {},
                             child: Text(
                               'Forgot Password?',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 12.sp),
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 12.sp),
                             ),
                           ),
                         ],
@@ -75,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                           if (state is AuthLoading) {
                             return const AuthLoadingButton();
                           }
-                          return AuthNormalButton(
+                          return MainNormalButton(
                             text: 'Login',
                             onPressed: () {
                               BlocProvider.of<AuthCubit>(context).login(
