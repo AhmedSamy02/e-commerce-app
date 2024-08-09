@@ -31,6 +31,7 @@ dependencies:
   password_strength_checker: ^1.2.4
   quickalert: ^1.1.0
   smooth_page_indicator: ^1.2.0+3
+  wolt_modal_sheet: ^0.9.2
 
 dev_dependencies:
   build_runner: ^2.4.12
