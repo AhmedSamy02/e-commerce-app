@@ -1,0 +1,367 @@
+{
+  "uuid": "8ac1d629-2032-4f0a-839d-65a62d1251b2",
+  "lastMigration": 32,
+  "name": "Auvnet task",
+  "endpointPrefix": "",
+  "latency": 500,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "8f75b15b-07db-4576-a52e-adf65fd98ac5",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "auth/login",
+      "responses": [
+        {
+          "uuid": "a6b4838e-eb80-439d-aff8-762e364b53d3",
+          "body": "{\n  \"status_code\": 400,\n  \"message\": \"Invalid email or password\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "9d594754-a0cc-4b8a-9a33-af66d2cef2b3",
+          "body": "{\n  \"status_code\": 200,\n  \"message\": \"User Logged in successfully\",\n  \"data\": {\n    \"id\": \"a165ds1a5s1c9acs\",\n    \"email\": \"nname1858@gmail.com\",\n    \"first_name\": \"Ahmed\",\n    \"last_name\": \"Samy\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFobWVkIFNhbXkiLCJlbWFpbCI6Im5uYW1lMTg1OEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IkFobWVkQDEyMyJ9.C4rjwaueRHb1ADFgiOlmWNd8AiKHj_Y7RyDwrVMyRYI\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "nname1858@gmail.com",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "Ahmed@123456",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "198e54c0-02df-4524-90dd-6863871fc8d7",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "auth/register",
+      "responses": [
+        {
+          "uuid": "2c3c4f3c-09d9-43ce-bd28-2ce9c95dfc7f",
+          "body": "{\n  \"status_code\": 400,\n  \"message\": \"Email is already exists\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "76fd29a2-6f8c-4c13-bcf8-d05879c57c58",
+          "body": "{\n  \"status_code\": 200,\n  \"message\": \"User added successfully\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "first_name",
+              "value": "Ahmed",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "last_name",
+              "value": "Samy",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "nname1858@gmail.com",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "Ahmed@123456",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "714ee3e4-7bc5-4295-b2cf-24375e517560",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "orders",
+      "responses": [
+        {
+          "uuid": "efd3f1b8-8735-4a00-a093-ebffce0eadfb",
+          "body": "{\n  \"status_code\": 200,\n  \"message\": \"Orders got successfully\",\n  \"data\": [\n    {\n      \"id\": \"ds451v8f4s184\",\n      \"createdAt\": \"2024-08-08T03:20:00\",\n      \"doneAt\": \"2024-08-08T13:21:18\",\n      \"status\": \"Cancelled\",\n      \"total_price\": 20.0,\n      \"cart\": [\n        {\n          \"product\": {\n            \"id\": \"2\",\n            \"title\": \"Classic Red Pullover Hoodie\",\n            \"price\": 10,\n            \"description\": \"Elevate your casual wardrobe with our Classic Red Pullover Hoodie. Crafted with a soft cotton blend for ultimate comfort, this vibrant red hoodie features a kangaroo pocket, adjustable drawstring hood, and ribbed cuffs for a snug fit. The timeless design ensures easy pairing with jeans or joggers for a relaxed yet stylish look, making it a versatile addition to your everyday attire.\",\n            \"category\": {\n              \"id\": \"1\",\n              \"name\": \"Clothes\",\n              \"image\": \"https://i.imgur.com/QkIa5tT.jpeg\"\n            },\n            \"images\": [\n              \"https://i.imgur.com/1twoaDy.jpeg\",\n              \"https://i.imgur.com/FDwQgLy.jpeg\",\n              \"https://i.imgur.com/kg1ZhhH.jpeg\"\n            ]\n          },\n          \"quantity\": 2\n        }\n      ]\n    },\n    {\n      \"id\": \"a9c5e1w9c8e1cac\",\n      \"createdAt\": \"2024-08-08T03:50:55\",\n      \"doneAt\": \"2024-08-08T13:50:55\",\n      \"total_price\": 40.0,\n      \"status\": \"Delivered\",\n      \"cart\": [\n        {\n          \"product\": {\n            \"id\": \"2\",\n            \"title\": \"Classic Red Pullover Hoodie\",\n            \"price\": 10,\n            \"description\": \"Elevate your casual wardrobe with our Classic Red Pullover Hoodie. Crafted with a soft cotton blend for ultimate comfort, this vibrant red hoodie features a kangaroo pocket, adjustable drawstring hood, and ribbed cuffs for a snug fit. The timeless design ensures easy pairing with jeans or joggers for a relaxed yet stylish look, making it a versatile addition to your everyday attire.\",\n            \"category\": {\n              \"id\": \"1\",\n              \"name\": \"Clothes\",\n              \"image\": \"https://i.imgur.com/QkIa5tT.jpeg\"\n            },\n            \"images\": [\n              \"https://i.imgur.com/1twoaDy.jpeg\",\n              \"https://i.imgur.com/FDwQgLy.jpeg\",\n              \"https://i.imgur.com/kg1ZhhH.jpeg\"\n            ]\n          },\n          \"quantity\": 4\n        }\n      ]\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "248ce241-a9af-4c38-aa72-e812fac119bb",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "change-password",
+      "responses": [
+        {
+          "uuid": "64cc509c-f2a4-4d8c-a2c2-156088002c81",
+          "body": "{\n  \"status_code\":400,\n  \"message\":\"The password that provided is incorrect\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cb431040-6a94-41cd-8dd3-505d5ff3174f",
+          "body": "{\n  \"status_code\":200,\n  \"message\":\"Password changed successfully.\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "old_password",
+              "value": "Ahmed@123456",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "52dfbac3-22a4-4316-8324-fb8af380955a",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "profile",
+      "responses": [
+        {
+          "uuid": "8a24499c-667c-4cae-9288-188da6f02dc0",
+          "body": "{\n  \"status_code\": 400,\n  \"message\": \"An error has occured\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "ef505d44-90ae-4502-94ee-041310b89cff",
+          "body": "{\n  \"status_code\":200,\n  \"message\":\"Name changed successfully\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "first_name",
+              "value": "Ahmed",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "last_name",
+              "value": "Mohamed",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "8f75b15b-07db-4576-a52e-adf65fd98ac5"
+    },
+    {
+      "type": "route",
+      "uuid": "198e54c0-02df-4524-90dd-6863871fc8d7"
+    },
+    {
+      "type": "route",
+      "uuid": "714ee3e4-7bc5-4295-b2cf-24375e517560"
+    },
+    {
+      "type": "route",
+      "uuid": "248ce241-a9af-4c38-aa72-e812fac119bb"
+    },
+    {
+      "type": "route",
+      "uuid": "52dfbac3-22a4-4316-8324-fb8af380955a"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}
