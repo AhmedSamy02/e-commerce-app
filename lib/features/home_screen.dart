@@ -4,9 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:simple_ecommerce/core/constants/assets.dart';
 import 'package:simple_ecommerce/core/constants/colors.dart';
-import 'package:simple_ecommerce/core/constants/values.dart';
-import 'package:simple_ecommerce/features/cart/data/repositories/cart_repo_impl.dart';
-import 'package:simple_ecommerce/features/cart/presentation/controllers/cart_cubit.dart';
 import 'package:simple_ecommerce/features/cart/presentation/screens/cart_screen.dart';
 import 'package:simple_ecommerce/features/shop/presentation/controllers/shop_cubit.dart';
 import 'package:simple_ecommerce/features/shop/presentation/screens/shop_screen.dart';
@@ -58,9 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
         BlocProvider<ShopCubit>(
           create: (context) => ShopCubit(),
         ),
-        BlocProvider<CartCubit>(
-          create: (context) => CartCubit(getit.get<CartRepositoryImpl>())..getCart(),
-        )
+        
       ],
       child: Scaffold(
         appBar: appBar[_currentIndex],

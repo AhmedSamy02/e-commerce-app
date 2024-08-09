@@ -17,4 +17,14 @@ class CartRepositoryImpl implements CartRepository {
       return left(UnexpectedFailure(message: e.toString()));
     }
   }
+  
+  @override
+  Either<Failure, void> saveCart(List<Cart> cart) {
+    try {
+      cartLocalDataSource.saveCart(cart);
+      return right(null);
+    } catch (e) {
+      return left(UnexpectedFailure(message: e.toString()));
+    }
+  }
 }

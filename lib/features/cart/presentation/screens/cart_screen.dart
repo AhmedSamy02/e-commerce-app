@@ -18,12 +18,12 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+
   @override
   Widget build(BuildContext context) {
-    
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
-        if (state is CartInitial || state is CartEmpty) {
+        if (state is CartEmpty) {
           return const EmptyCartScreen();
         }
         if (state is CartLoading) {
@@ -45,7 +45,7 @@ class _CartScreenState extends State<CartScreen> {
                     height: 42.h,
                   );
                 },
-                padding: EdgeInsets.only(bottom: 0.11.sh),
+                padding: EdgeInsets.only(bottom: 0.11.sh, top: 0.03.sh),
                 itemCount: state.cart.length,
                 itemBuilder: (context, index) {
                   return CartItem(

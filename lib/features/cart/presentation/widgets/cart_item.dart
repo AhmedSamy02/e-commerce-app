@@ -1,19 +1,28 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:simple_ecommerce/core/constants/colors.dart';
 import 'package:simple_ecommerce/core/constants/screens.dart';
 import 'package:simple_ecommerce/core/constants/widgets/items_count_row.dart';
 import 'package:simple_ecommerce/features/cart/data/models/cart.dart';
+import 'package:simple_ecommerce/features/cart/presentation/controllers/cart_cubit.dart';
 
-class CartItem extends StatelessWidget {
-  const CartItem({super.key, required this.cart});
-  final Cart cart;
+class CartItem extends StatefulWidget {
+  CartItem({super.key, required this.cart});
+  Cart cart;
+
+  @override
+  State<CartItem> createState() => _CartItemState();
+}
+
+class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController controller =
-        TextEditingController(text: cart.quantity.toString());
+        TextEditingController(text: widget.cart.quantity.toString());
     return Padding(
       padding: EdgeInsets.only(
         left: 14.sp,
@@ -23,8 +32,8 @@ class CartItem extends StatelessWidget {
           Navigator.of(context).pushNamed(
             kProductDetailsScreen,
             arguments: {
-              'product': cart.product,
-              'controller': controller,
+              'product': widget.cart.product,
+              'controller': null,
             },
           );
         },
@@ -42,7 +51,7 @@ class CartItem extends StatelessWidget {
                       Radius.circular(20.r),
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: cart.product.images[0],
+                      imageUrl: widget.cart.product.images[0],
                       fit: BoxFit.cover,
                       progressIndicatorBuilder: (context, url, progress) {
                         return Center(
@@ -66,34 +75,47 @@ class CartItem extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10.sp),
+                  padding: EdgeInsets.only(left: 16.sp),
                   child: Column(
                     children: [
                       Row(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                cart.product.title,
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600,
+                          SizedBox(
+                            width: 0.55.sw,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.cart.product.title,
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  maxLines: 2,
                                 ),
-                              ),
-                              Text(
-                                cart.product.category.name,
-                                style: TextStyle(
-                                  color: Colors.black38,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600,
+                                Text(
+                                  widget.cart.product.category.name,
+                                  style: TextStyle(
+                                    color: Colors.black38,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           const Spacer(),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                BlocProvider.of<CartCubit>(context)
+                                    .removeCartItem(widget.cart);
+                                    Fluttertoast.showToast(
+                                      msg: 'Item removed from cart successfully',
+                                      backgroundColor: Colors.green[900],
+                                      textColor: Colors.white,
+                                      fontSize: 14.sp,
+                                    );
+                              },
                               icon: const Icon(
                                 Icons.close,
                                 color: Colors.grey,
@@ -108,15 +130,18 @@ class CartItem extends StatelessWidget {
                           ItemsCountRow(
                             controller: controller,
                             onChanged: (value) {
-                              cart.quantity = int.parse(value);
+                              BlocProvider.of<CartCubit>(context)
+                                  .changeQunatity(
+                                      widget.cart, int.parse(value));
+                                      
                             },
                           ),
                           Padding(
                             padding: EdgeInsets.only(right: 12.sp),
                             child: Text(
-                              '\$${cart.product.price}',
+                              '\$${widget.cart.product.price * int.parse(controller.text)}',
                               style: TextStyle(
-                                fontSize: 15.sp,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),

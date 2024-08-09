@@ -36,7 +36,11 @@ class _ItemsCountRowState extends State<ItemsCountRow> {
             int currNum = int.parse(widget.controller.text);
             if (currNum > 1) {
               widget.controller.text = (currNum - 1).toString();
-              setState(() {});
+              if (widget.onChanged != null) {
+                widget.onChanged!(widget.controller.text);
+              } else {
+                setState(() {});
+              }
             }
           },
         ),
@@ -45,7 +49,6 @@ class _ItemsCountRowState extends State<ItemsCountRow> {
           height: 32.h,
           child: TextFormField(
             controller: widget.controller,
-            onChanged: widget.onChanged,
             readOnly: true,
             textAlign: TextAlign.center,
             decoration: const InputDecoration(
@@ -63,7 +66,11 @@ class _ItemsCountRowState extends State<ItemsCountRow> {
             if (currNum < maxNumber) {
               widget.controller.text = (currNum + 1).toString();
             }
-            setState(() {});
+            if (widget.onChanged != null) {
+              widget.onChanged!(widget.controller.text);
+            } else {
+              setState(() {});
+            }
           },
         ),
       ],
