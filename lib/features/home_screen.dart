@@ -5,6 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:simple_ecommerce/core/constants/assets.dart';
 import 'package:simple_ecommerce/core/constants/colors.dart';
 import 'package:simple_ecommerce/features/cart/presentation/screens/cart_screen.dart';
+import 'package:simple_ecommerce/features/order_history/presentation/controllers/order_history_cubit.dart';
+import 'package:simple_ecommerce/features/order_history/presentation/screens/order_history_screen.dart';
 import 'package:simple_ecommerce/features/shop/presentation/controllers/shop_cubit.dart';
 import 'package:simple_ecommerce/features/shop/presentation/screens/shop_screen.dart';
 
@@ -48,14 +50,16 @@ class _HomeScreenState extends State<HomeScreen> {
     final List<Widget> homeBodies = [
       const ShopScreen(),
       const CartScreen(),
-      Placeholder(),
+      OrderHistoryScreen(),
     ];
     return MultiBlocProvider(
       providers: [
         BlocProvider<ShopCubit>(
           create: (context) => ShopCubit(),
         ),
-        
+        BlocProvider<OrderHistoryCubit>(
+          create: (context) => OrderHistoryCubit(),
+        )
       ],
       child: Scaffold(
         appBar: appBar[_currentIndex],

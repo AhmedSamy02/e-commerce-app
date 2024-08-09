@@ -5,3 +5,5 @@ const kLandingScreen = 'landing_screen';
 const kProductDetailsScreen = 'product_details_screen';
 const kOrderSuccessScreen = 'order_success_screen';
 const kOrderFailedScreen = 'order_failed_screen';
+const kOrderHistoryScreen = 'order_history_screen';
+const kOrderDetailsScreen = 'order_details_screen';

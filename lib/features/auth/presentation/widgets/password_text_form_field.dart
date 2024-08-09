@@ -18,6 +18,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
       controller: widget.controller,
       textInputAction: widget.textInputAction,
       obscureText: obscureText,
+      cursorColor: Colors.green[900],
       decoration: InputDecoration(
         labelText: 'Password',
         hintText: 'Enter your password',

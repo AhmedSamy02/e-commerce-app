@@ -12,6 +12,9 @@ import 'package:simple_ecommerce/features/cart/data/data_source/cart_local_data_
 import 'package:simple_ecommerce/features/cart/data/data_source/cart_remote_data_source.dart';
 import 'package:simple_ecommerce/features/cart/data/models/cart.dart';
 import 'package:simple_ecommerce/features/cart/data/repositories/cart_repo_impl.dart';
+import 'package:simple_ecommerce/features/order_history/data/data_source/order_history_remote_data_source.dart';
+import 'package:simple_ecommerce/features/order_history/data/repositories/order_history_repo_impl.dart';
+import 'package:simple_ecommerce/features/order_history/domain/repositories/order_history_repo.dart';
 import 'package:simple_ecommerce/features/shop/data/data_source/shop_local_data_source.dart';
 import 'package:simple_ecommerce/features/shop/data/data_source/shop_remote_data_source.dart';
 import 'package:simple_ecommerce/features/shop/data/models/category.dart';
@@ -44,8 +47,12 @@ void initializeLocators() {
   );
   getit.registerLazySingleton<CartRepositoryImpl>(
     () => CartRepositoryImpl(
-      cartLocalDataSource: CartLocalDataSourceImpl(),
-      cartRemoteDataSource: CartRemoteDataSourceImpl(dio: dio)
+        cartLocalDataSource: CartLocalDataSourceImpl(),
+        cartRemoteDataSource: CartRemoteDataSourceImpl(dio: dio)),
+  );
+  getit.registerLazySingleton<OrderHistoryRepository>(
+    () => OrderHistoryRepositoryImpl(
+      remoteDataSource: OrderHistoryRemoteDataSourceImpl(dio: dio),
     ),
   );
 }

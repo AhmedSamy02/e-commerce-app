@@ -12,6 +12,8 @@ import 'package:simple_ecommerce/features/cart/presentation/screens/order_failed
 import 'package:simple_ecommerce/features/cart/presentation/screens/order_sucess_screen.dart';
 import 'package:simple_ecommerce/features/home_screen.dart';
 import 'package:simple_ecommerce/features/landing_screen.dart';
+import 'package:simple_ecommerce/features/order_history/presentation/screens/order_details_screen.dart';
+import 'package:simple_ecommerce/features/order_history/presentation/screens/order_history_screen.dart';
 import 'package:simple_ecommerce/features/shop/presentation/screens/product_details_screen.dart';
 
 void main() async {
@@ -42,6 +44,8 @@ class MainApp extends StatelessWidget {
             kProductDetailsScreen: (context) => const ProductDetailsScreen(),
             kOrderSuccessScreen: (context) => const OrderSucessScreen(),
             kOrderFailedScreen: (context) => const OrderFailedScreen(),
+            kOrderHistoryScreen: (context) => const OrderHistoryScreen(),
+            kOrderDetailsScreen: (context) => const OrderDetailsScreen(),
           },
           initialRoute: kHomeScreen,
         ),
