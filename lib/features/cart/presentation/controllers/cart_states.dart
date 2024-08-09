@@ -19,3 +19,9 @@ class CartLoaded extends CartState {
 }
 
 class CartLoading extends CartState {}
+class CheckoutLoading extends CartState {
+  final List<Cart> cart;
+
+  CheckoutLoading({required this.cart});
+}
+class CheckoutFinished extends CartState {}

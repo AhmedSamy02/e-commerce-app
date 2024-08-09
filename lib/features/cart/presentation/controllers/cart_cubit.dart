@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simple_ecommerce/core/constants/screens.dart';
 import 'package:simple_ecommerce/features/cart/data/models/cart.dart';
 import 'package:simple_ecommerce/features/cart/domain/repositories/cart_repo.dart';
+import 'package:simple_ecommerce/features/cart/domain/use_cases/checkout_use_case.dart';
 import 'package:simple_ecommerce/features/cart/domain/use_cases/get_cart_use_case.dart';
 import 'package:simple_ecommerce/features/cart/domain/use_cases/update_cart_use_case.dart';
 import 'package:simple_ecommerce/features/cart/presentation/controllers/cart_states.dart';
@@ -64,5 +67,23 @@ class CartCubit extends Cubit<CartState> {
 
   Future<void> updateCartList() async {
     await UpdateCartUseCase(cartRepository: cartRepository).call(cartItems);
+  }
+
+  Future<void> checkout(BuildContext context) async {
+    emit(CheckoutLoading(cart: cartItems));
+    final result =
+        await CheckoutUseCase(cartRepository: cartRepository).call(cartItems);
+    Navigator.of(context).pop();
+    result.fold((failure) {
+      Navigator.of(context)
+          .pushNamed(kOrderFailedScreen, arguments: failure.message);
+      emit(CartLoaded(cart: cartItems));
+    }, (_) {
+      Navigator.of(context).pushNamed(kOrderSuccessScreen);
+      cartItems.clear();
+      updateCartList();
+      emit(CartEmpty());
+    });
+    
   }
 }

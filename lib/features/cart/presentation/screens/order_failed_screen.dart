@@ -31,6 +31,7 @@ class OrderFailedScreen extends StatelessWidget {
             ),
             SizedBox(
               width: 0.75.sw,
+              height: 0.2.sh,
               child: Text(
                 message,
                 textAlign: TextAlign.center,
@@ -41,7 +42,7 @@ class OrderFailedScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 0.3.sh,
+              height: 0.2.sh,
             ),
             SizedBox(
               width: 0.8.sw,

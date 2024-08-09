@@ -8,6 +8,7 @@ import 'package:simple_ecommerce/features/auth/presentation/screens/login_screen
 import 'package:simple_ecommerce/features/auth/presentation/screens/register_screen.dart';
 import 'package:simple_ecommerce/features/cart/data/repositories/cart_repo_impl.dart';
 import 'package:simple_ecommerce/features/cart/presentation/controllers/cart_cubit.dart';
+import 'package:simple_ecommerce/features/cart/presentation/screens/order_failed_screen.dart';
 import 'package:simple_ecommerce/features/cart/presentation/screens/order_sucess_screen.dart';
 import 'package:simple_ecommerce/features/home_screen.dart';
 import 'package:simple_ecommerce/features/landing_screen.dart';
@@ -40,6 +41,7 @@ class MainApp extends StatelessWidget {
             kRegisterScreen: (context) => const RegisterScreen(),
             kProductDetailsScreen: (context) => const ProductDetailsScreen(),
             kOrderSuccessScreen: (context) => const OrderSucessScreen(),
+            kOrderFailedScreen: (context) => const OrderFailedScreen(),
           },
           initialRoute: kHomeScreen,
         ),
