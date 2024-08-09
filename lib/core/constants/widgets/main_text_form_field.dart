@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AuthTextFormField extends StatelessWidget {
-  const AuthTextFormField(
+class MainTextFormField extends StatelessWidget {
+  const MainTextFormField(
       {super.key,
       required this.labelText,
       this.hintText,

@@ -12,8 +12,8 @@ import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_loading
 import 'package:simple_ecommerce/core/constants/widgets/auth_normal_button.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_paragraph.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_row.dart';
-import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_text_form_field.dart';
-import 'package:simple_ecommerce/features/auth/presentation/widgets/email_text_form_field.dart';
+import 'package:simple_ecommerce/core/constants/widgets/main_text_form_field.dart';
+import 'package:simple_ecommerce/core/constants/widgets/email_text_form_field.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/password_with_checker.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -55,7 +55,7 @@ class RegisterScreen extends StatelessWidget {
                           children: [
                             SizedBox(
                               width: 0.42.sw,
-                              child: AuthTextFormField(
+                              child: MainTextFormField(
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
                                 labelText: 'First Name',
@@ -75,7 +75,7 @@ class RegisterScreen extends StatelessWidget {
                             const Spacer(),
                             SizedBox(
                               width: 0.42.sw,
-                              child: AuthTextFormField(
+                              child: MainTextFormField(
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
                                 validator: (value) {

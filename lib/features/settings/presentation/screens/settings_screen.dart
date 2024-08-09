@@ -7,7 +7,7 @@ import 'package:simple_ecommerce/core/constants/screens.dart';
 import 'package:simple_ecommerce/core/constants/values.dart';
 import 'package:simple_ecommerce/features/settings/presentation/widgets/logout_button.dart';
 import 'package:simple_ecommerce/features/settings/presentation/widgets/setting_account_data.dart';
-import 'package:simple_ecommerce/features/settings/presentation/widgets/settings_row.dart';
+import 'package:simple_ecommerce/core/constants/widgets/list_tile_row.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -70,7 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(
               height: 24.h,
             ),
-            SettingsRow(
+            ListTileRow(
               icon: kMyDetailsIconAsset,
               title: 'My Details',
               iconHeight: 14.h,
@@ -83,7 +83,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(
               height: 6.h,
             ),
-            SettingsRow(
+            ListTileRow(
               icon: kOrderIconAsset,
               title: 'Orders',
               iconHeight: 18.h,

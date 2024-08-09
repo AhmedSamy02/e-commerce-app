@@ -10,7 +10,7 @@ import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_loading
 import 'package:simple_ecommerce/core/constants/widgets/auth_normal_button.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_paragraph.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_row.dart';
-import 'package:simple_ecommerce/features/auth/presentation/widgets/auth_text_form_field.dart';
+import 'package:simple_ecommerce/core/constants/widgets/main_text_form_field.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/password_text_form_field.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -43,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                           subtitle: 'Enter your email and password'),
                       Padding(
                         padding: EdgeInsets.only(top: 28.sp),
-                        child: AuthTextFormField(
+                        child: MainTextFormField(
                           labelText: 'Email',
                           hintText: 'Enter your email',
                           controller: emailController,

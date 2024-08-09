@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class SettingsRow extends StatelessWidget {
-  const SettingsRow(
+class ListTileRow extends StatelessWidget {
+  const ListTileRow(
       {super.key,
       required this.icon,
       required this.title,

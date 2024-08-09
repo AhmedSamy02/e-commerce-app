@@ -15,6 +15,8 @@ import 'package:simple_ecommerce/features/landing_screen.dart';
 import 'package:simple_ecommerce/features/order_history/presentation/controllers/order_history_cubit.dart';
 import 'package:simple_ecommerce/features/order_history/presentation/screens/order_details_screen.dart';
 import 'package:simple_ecommerce/features/order_history/presentation/screens/order_history_screen.dart';
+import 'package:simple_ecommerce/features/profile/presentation/screens/change_password_screen.dart';
+import 'package:simple_ecommerce/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:simple_ecommerce/features/shop/presentation/controllers/shop_cubit.dart';
 import 'package:simple_ecommerce/features/shop/presentation/screens/product_details_screen.dart';
 import 'package:simple_ecommerce/features/splash_screen.dart';
@@ -60,8 +62,10 @@ class MainApp extends StatelessWidget {
             kOrderHistoryScreen: (context) => const OrderHistoryScreen(),
             kOrderDetailsScreen: (context) => const OrderDetailsScreen(),
             kSplashScreen: (context) => const SplashScreen(),
+            kEditProfileScreen:(context)=>const EditProfileScreen(),
+            kChangePasswordScreen:(context)=>const ChangePasswordScreen(),
           },
-          initialRoute: kSplashScreen,
+          initialRoute: kEditProfileScreen,
         ),
       ),
     );
