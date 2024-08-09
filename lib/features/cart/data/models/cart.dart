@@ -10,4 +10,11 @@ class Cart {
   int quantity;
 
   Cart({required this.product, required this.quantity});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'product': product.toJson(),
+      'quantity': quantity,
+    };
+  }
 }

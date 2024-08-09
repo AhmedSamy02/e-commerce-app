@@ -9,6 +9,7 @@ import 'package:simple_ecommerce/features/auth/data/data_source/auth_remote_data
 import 'package:simple_ecommerce/features/auth/data/repositories/auth_repositoriy.dart';
 import 'package:simple_ecommerce/features/auth/domain/repositories/auth_repository.dart';
 import 'package:simple_ecommerce/features/cart/data/data_source/cart_local_data_source.dart';
+import 'package:simple_ecommerce/features/cart/data/data_source/cart_remote_data_source.dart';
 import 'package:simple_ecommerce/features/cart/data/models/cart.dart';
 import 'package:simple_ecommerce/features/cart/data/repositories/cart_repo_impl.dart';
 import 'package:simple_ecommerce/features/shop/data/data_source/shop_local_data_source.dart';
@@ -44,6 +45,7 @@ void initializeLocators() {
   getit.registerLazySingleton<CartRepositoryImpl>(
     () => CartRepositoryImpl(
       cartLocalDataSource: CartLocalDataSourceImpl(),
+      cartRemoteDataSource: CartRemoteDataSourceImpl(dio: dio)
     ),
   );
 }
