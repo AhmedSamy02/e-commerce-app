@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final List<Widget> homeBodies = [
       const ShopScreen(),
       const CartScreen(),
-      OrderHistoryScreen(),
+      const Placeholder(),
     ];
     return MultiBlocProvider(
       providers: [

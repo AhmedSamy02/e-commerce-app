@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simple_ecommerce/core/constants/assets.dart';
 
-class CartErrorScreen extends StatelessWidget {
-  const CartErrorScreen({super.key, required this.message});
+class ErrorScreen extends StatelessWidget {
+  const ErrorScreen({super.key, required this.message});
   final String message;
   @override
   Widget build(BuildContext context) {

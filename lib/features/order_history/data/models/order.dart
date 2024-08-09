@@ -22,7 +22,7 @@ class OrderModel {
         createdAt: DateTime.parse(json['createdAt']),
         doneAt: DateTime.parse(json['doneAt']),
         status: json['status'],
-        totalPrice: json['totalPrice'],
+        totalPrice: json['total_price'],
         cart:
             (json['cart'] as List).map((cart) => Cart.fromJson(cart)).toList());
   }

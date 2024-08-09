@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:simple_ecommerce/core/constants/colors.dart';
 import 'package:simple_ecommerce/features/cart/presentation/controllers/cart_cubit.dart';
 import 'package:simple_ecommerce/features/cart/presentation/controllers/cart_states.dart';
-import 'package:simple_ecommerce/features/cart/presentation/screens/cart_error_screen.dart';
+import 'package:simple_ecommerce/core/constants/widgets/error_screen.dart';
 import 'package:simple_ecommerce/features/cart/presentation/screens/empty_cart_screen.dart';
 import 'package:simple_ecommerce/features/cart/presentation/widgets/cart_list_widget.dart';
 
@@ -29,7 +29,7 @@ class _CartScreenState extends State<CartScreen> {
           );
         }
         if (state is CartError) {
-          return CartErrorScreen(message: state.message);
+          return ErrorScreen(message: state.message);
         }
         if (state is CartLoaded) {
           return CartListWidget(cart: state.cart);
