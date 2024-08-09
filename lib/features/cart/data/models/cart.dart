@@ -17,4 +17,11 @@ class Cart {
       'quantity': quantity,
     };
   }
+
+  factory Cart.fromJson(Map<String, dynamic> json) {
+    return Cart(
+      product: Product.fromJson(json['product']),
+      quantity: json['quantity'],
+    );
+  }
 }
