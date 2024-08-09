@@ -21,6 +21,12 @@ class OrderHistoryScreen extends StatelessWidget {
     };
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: Text(
           'Order History',
           style: TextStyle(
@@ -28,7 +34,7 @@ class OrderHistoryScreen extends StatelessWidget {
             fontSize: 22.sp,
           ),
         ),
-        toolbarHeight: 0.04.sh,
+        toolbarHeight: 0.05.sh,
         centerTitle: true,
       ),
       body: BlocBuilder<OrderHistoryCubit, OrderHistoryState>(
@@ -39,9 +45,8 @@ class OrderHistoryScreen extends StatelessWidget {
             );
           }
           if (state is OrderHistoryError) {
-            return RefreshIndicator(
-              color: kMainGreen,
-              onRefresh: () async {
+            return GestureDetector(
+              onTap: () async {
                 await BlocProvider.of<OrderHistoryCubit>(context).getOrders();
               },
               child: ErrorScreen(message: state.message),
