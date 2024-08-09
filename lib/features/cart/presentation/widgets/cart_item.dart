@@ -11,9 +11,9 @@ import 'package:simple_ecommerce/features/cart/data/models/cart.dart';
 import 'package:simple_ecommerce/features/cart/presentation/controllers/cart_cubit.dart';
 
 class CartItem extends StatefulWidget {
-  CartItem({super.key, required this.cart});
+  CartItem({super.key, required this.cart, required this.preview});
   Cart cart;
-
+  final bool preview;
   @override
   State<CartItem> createState() => _CartItemState();
 }
@@ -105,21 +105,25 @@ class _CartItemState extends State<CartItem> {
                             ),
                           ),
                           const Spacer(),
-                          IconButton(
-                              onPressed: () {
-                                BlocProvider.of<CartCubit>(context)
-                                    .removeCartItem(widget.cart);
+                          !widget.preview
+                              ? IconButton(
+                                  onPressed: () {
+                                    BlocProvider.of<CartCubit>(context)
+                                        .removeCartItem(widget.cart);
                                     Fluttertoast.showToast(
-                                      msg: 'Item removed from cart successfully',
+                                      msg:
+                                          'Item removed from cart successfully',
                                       backgroundColor: Colors.green[900],
                                       textColor: Colors.white,
                                       fontSize: 14.sp,
                                     );
-                              },
-                              icon: const Icon(
-                                Icons.close,
-                                color: Colors.grey,
-                              ))
+                                  },
+                                  icon: const Icon(
+                                    Icons.close,
+                                    color: Colors.grey,
+                                  ),
+                                )
+                              : const SizedBox(),
                         ],
                       ),
                       const Spacer(),
@@ -127,19 +131,18 @@ class _CartItemState extends State<CartItem> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ItemsCountRow(
+                          !widget.preview? ItemsCountRow(
                             controller: controller,
                             onChanged: (value) {
                               BlocProvider.of<CartCubit>(context)
                                   .changeQunatity(
                                       widget.cart, int.parse(value));
-                                      
                             },
-                          ),
+                          ):const SizedBox(),
                           Padding(
                             padding: EdgeInsets.only(right: 12.sp),
                             child: Text(
-                              '\$${widget.cart.product.price * int.parse(controller.text)}',
+                              '${widget.preview?'${widget.cart.quantity}x ':''} \$${widget.cart.product.price * int.parse(controller.text)}',
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w600,
