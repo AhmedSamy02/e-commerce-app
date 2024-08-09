@@ -9,3 +9,5 @@ const kFailedAlertAsset = 'assets/images/failed_alert.jpg';
 const kCartErrorAsset = 'assets/images/cart_error.jpg';
 const kSucessAsset = 'assets/gifs/success.gif';
 const kFailedAsset = 'assets/gifs/failed.gif';
+const kOrderIconAsset = 'assets/svgs/order.svg';
+const kMyDetailsIconAsset = 'assets/svgs/my_details.svg';

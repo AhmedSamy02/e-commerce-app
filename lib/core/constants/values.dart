@@ -16,3 +16,7 @@ final logger = Logger(
 final getit = GetIt.instance;
 const kShopBox = 'products';
 const kCartBox = 'cart';
+const kFirstNamePref = 'firstName';
+const kLastNamePref = 'lastName';
+const kEmailPref = 'email';
+const kId = 'id';

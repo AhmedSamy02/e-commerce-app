@@ -87,10 +87,10 @@ bool checkName(String text) {
 Future<void> cacheUser(User user) async {
   final secureStorage = getit.get<FlutterSecureStorage>();
   await secureStorage.write(key: 'token', value: user.token!);
-  await secureStorage.write(key: 'email', value: user.email);
-  await secureStorage.write(key: 'firstName', value: user.firstName);
-  await secureStorage.write(key: 'lastName', value: user.lastName);
-  await secureStorage.write(key: 'id', value: user.id);
+  await secureStorage.write(key: kEmailPref, value: user.email);
+  await secureStorage.write(key: kFirstNamePref, value: user.firstName);
+  await secureStorage.write(key: kLastNamePref, value: user.lastName);
+  await secureStorage.write(key: kId, value: user.id);
 }
 
 Future<void> clearCache() async {

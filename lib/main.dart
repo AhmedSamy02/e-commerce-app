@@ -12,8 +12,10 @@ import 'package:simple_ecommerce/features/cart/presentation/screens/order_failed
 import 'package:simple_ecommerce/features/cart/presentation/screens/order_sucess_screen.dart';
 import 'package:simple_ecommerce/features/home_screen.dart';
 import 'package:simple_ecommerce/features/landing_screen.dart';
+import 'package:simple_ecommerce/features/order_history/presentation/controllers/order_history_cubit.dart';
 import 'package:simple_ecommerce/features/order_history/presentation/screens/order_details_screen.dart';
 import 'package:simple_ecommerce/features/order_history/presentation/screens/order_history_screen.dart';
+import 'package:simple_ecommerce/features/shop/presentation/controllers/shop_cubit.dart';
 import 'package:simple_ecommerce/features/shop/presentation/screens/product_details_screen.dart';
 import 'package:simple_ecommerce/features/splash_screen.dart';
 
@@ -29,9 +31,19 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      child: BlocProvider(
-        create: (context) =>
-            CartCubit(getit.get<CartRepositoryImpl>())..getCart(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) =>
+                CartCubit(getit.get<CartRepositoryImpl>())..getCart(),
+          ),
+          BlocProvider<ShopCubit>(
+            create: (context) => ShopCubit(),
+          ),
+          BlocProvider<OrderHistoryCubit>(
+            create: (context) => OrderHistoryCubit(),
+          )
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
@@ -47,7 +59,7 @@ class MainApp extends StatelessWidget {
             kOrderFailedScreen: (context) => const OrderFailedScreen(),
             kOrderHistoryScreen: (context) => const OrderHistoryScreen(),
             kOrderDetailsScreen: (context) => const OrderDetailsScreen(),
-            kSplashScreen : (context) => const SplashScreen(),
+            kSplashScreen: (context) => const SplashScreen(),
           },
           initialRoute: kSplashScreen,
         ),
