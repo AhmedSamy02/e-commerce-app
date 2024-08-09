@@ -8,6 +8,7 @@ import 'package:simple_ecommerce/features/auth/presentation/screens/login_screen
 import 'package:simple_ecommerce/features/auth/presentation/screens/register_screen.dart';
 import 'package:simple_ecommerce/features/cart/data/repositories/cart_repo_impl.dart';
 import 'package:simple_ecommerce/features/cart/presentation/controllers/cart_cubit.dart';
+import 'package:simple_ecommerce/features/cart/presentation/screens/order_sucess_screen.dart';
 import 'package:simple_ecommerce/features/home_screen.dart';
 import 'package:simple_ecommerce/features/landing_screen.dart';
 import 'package:simple_ecommerce/features/shop/presentation/screens/product_details_screen.dart';
@@ -25,7 +26,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       child: BlocProvider(
-        create: (context) => CartCubit(getit.get<CartRepositoryImpl>())..getCart(),
+        create: (context) =>
+            CartCubit(getit.get<CartRepositoryImpl>())..getCart(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
@@ -37,6 +39,7 @@ class MainApp extends StatelessWidget {
             kHomeScreen: (context) => const HomeScreen(),
             kRegisterScreen: (context) => const RegisterScreen(),
             kProductDetailsScreen: (context) => const ProductDetailsScreen(),
+            kOrderSuccessScreen: (context) => const OrderSucessScreen(),
           },
           initialRoute: kHomeScreen,
         ),

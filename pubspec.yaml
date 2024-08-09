@@ -47,6 +47,7 @@ flutter:
     - assets/images/
     - assets/svgs/
     - assets/videos/
+    - assets/gifs/
     - assets/icons/
     - assets/audio/
     - assets/fonts/Roboto/

@@ -7,3 +7,5 @@ const kProfileAsset = 'assets/icons/profile.svg';
 const kShopAsset = 'assets/icons/shop.svg';
 const kFailedAlertAsset = 'assets/images/failed_alert.jpg';
 const kCartErrorAsset = 'assets/images/cart_error.jpg';
+const kSucessAsset = 'assets/gifs/success.gif';
+const kFailedAsset = 'assets/gifs/failed.gif';

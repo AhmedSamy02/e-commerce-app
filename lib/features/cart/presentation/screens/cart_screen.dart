@@ -9,6 +9,8 @@ import 'package:simple_ecommerce/features/cart/presentation/controllers/cart_sta
 import 'package:simple_ecommerce/features/cart/presentation/screens/cart_error_screen.dart';
 import 'package:simple_ecommerce/features/cart/presentation/screens/empty_cart_screen.dart';
 import 'package:simple_ecommerce/features/cart/presentation/widgets/cart_item.dart';
+import 'package:simple_ecommerce/features/cart/presentation/widgets/checkout_sheet.dart';
+import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -18,7 +20,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
@@ -70,7 +71,29 @@ class _CartScreenState extends State<CartScreen> {
                       ]),
                   width: 0.8.sw,
                   margin: EdgeInsets.only(bottom: 0.015.sh),
-                  child: MainNormalButton(text: 'Checkout', onPressed: () {}),
+                  child: MainNormalButton(
+                      text: 'Checkout',
+                      onPressed: () {
+                        WoltModalSheet.show(
+                          context: context,
+                          barrierDismissible: true,
+                          showDragHandle: false,
+                          pageListBuilder: (bottomSheetContext) => [
+                            SliverWoltModalSheetPage(
+                              hasTopBarLayer: false,
+                              mainContentSliversBuilder: (context) => [
+                                SliverToBoxAdapter(
+                                  child: CheckoutSheet(
+                                    totalCost:
+                                        BlocProvider.of<CartCubit>(context)
+                                            .computeTotalCost(),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        );
+                      }),
                 ),
               ),
             ],
