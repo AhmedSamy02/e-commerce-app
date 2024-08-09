@@ -71,7 +71,7 @@ class MainApp extends StatelessWidget {
             kEditProfileScreen: (context) => const EditProfileScreen(),
             kChangePasswordScreen: (context) => const ChangePasswordScreen(),
           },
-          initialRoute: kHomeScreen,
+          initialRoute: kSplashScreen,
         ),
       ),
     );

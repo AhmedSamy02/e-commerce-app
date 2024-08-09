@@ -30,7 +30,7 @@ class AuthCubit extends Cubit<AuthState> {
         showErrorQuickAlert(context, 'Server error', failure.message);
         emit(AuthError(failure.message));
       }, (none) {
-        Navigator.pushReplacementNamed(context, kHomeScreen);
+        Navigator.of(context).pushReplacementNamed(kHomeScreen);
       });
     } catch (e) {
       showErrorQuickAlert(context, 'Error', 'An error has occured');
@@ -46,22 +46,22 @@ class AuthCubit extends Cubit<AuthState> {
     BuildContext context,
     GlobalKey<FormState> formKey,
   ) async {
-    if(firstName.isEmpty){
+    if (firstName.isEmpty) {
       showErrorQuickAlert(context, 'Error', 'First name cannot be empty');
       emit(AuthError('First name cannot be empty'));
       return;
     }
-    if(lastName.isEmpty){
+    if (lastName.isEmpty) {
       showErrorQuickAlert(context, 'Error', 'Last name cannot be empty');
       emit(AuthError('Last name cannot be empty'));
       return;
     }
-    if(email.isEmpty){
+    if (email.isEmpty) {
       showErrorQuickAlert(context, 'Error', 'Email cannot be empty');
       emit(AuthError('Email cannot be empty'));
       return;
     }
-    if(password.isEmpty){
+    if (password.isEmpty) {
       showErrorQuickAlert(context, 'Error', 'Password cannot be empty');
       emit(AuthError('Password cannot be empty'));
       return;

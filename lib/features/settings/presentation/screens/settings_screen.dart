@@ -20,8 +20,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,9 +34,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Navigator.pushNamed(context, kEditProfileScreen);
                   },
                   child: SettingsAccountData(
-                    firstName: BlocProvider.of<ProfileCubit>(context).oldFirstName,
-                    lastName: BlocProvider.of<ProfileCubit>(context).oldLastName,
-                    email: BlocProvider.of<ProfileCubit>(context).emailController.text,
+                    firstName:
+                        BlocProvider.of<ProfileCubit>(context).oldFirstName,
+                    lastName:
+                        BlocProvider.of<ProfileCubit>(context).oldLastName,
+                    email: BlocProvider.of<ProfileCubit>(context)
+                        .emailController
+                        .text,
                   ),
                 );
               },
@@ -52,7 +54,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               iconHeight: 14.h,
               iconWidth: 14.h,
               onTap: () {
-                    Navigator.pushNamed(context, kEditProfileScreen);
+                Navigator.pushNamed(context, kEditProfileScreen);
               },
             ),
             const Divider(),
@@ -81,8 +83,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   confirmBtnColor: Colors.green,
                   onConfirmBtnTap: () async {
                     final secure = getit.get<FlutterSecureStorage>();
-                    await secure.deleteAll();
-                    Navigator.pushReplacementNamed(context, kLoginScreen);
+                    secure.deleteAll().then(
+                      (value) {
+                        Navigator.of(context).pop();
+                        Navigator.of(context)
+                            .pushReplacementNamed(kLandingScreen);
+                      },
+                    );
                   },
                 );
               },
