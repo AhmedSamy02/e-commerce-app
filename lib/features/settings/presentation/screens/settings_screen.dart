@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:simple_ecommerce/core/constants/assets.dart';
 import 'package:simple_ecommerce/core/constants/screens.dart';
 import 'package:simple_ecommerce/core/constants/values.dart';
+import 'package:simple_ecommerce/features/profile/presentation/controllers/profile_cubit.dart';
+import 'package:simple_ecommerce/features/profile/presentation/controllers/profile_state.dart';
 import 'package:simple_ecommerce/features/settings/presentation/widgets/logout_button.dart';
 import 'package:simple_ecommerce/features/settings/presentation/widgets/setting_account_data.dart';
 import 'package:simple_ecommerce/core/constants/widgets/list_tile_row.dart';
@@ -17,38 +20,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String firstName = 'John';
-  String lastName = 'Doe';
-  String email = 'N/A';
-  @override
-  void initState() {
-    super.initState();
-    final secure = getit.get<FlutterSecureStorage>();
-    secure.read(key: kFirstNamePref).then(
-      (value) {
-        if (value != null) {
-          firstName = value;
-        }
-        setState(() {});
-      },
-    );
-    secure.read(key: kLastNamePref).then(
-      (value) {
-        if (value != null) {
-          lastName = value;
-        }
-        setState(() {});
-      },
-    );
-    secure.read(key: kEmailPref).then(
-      (value) {
-        if (value != null) {
-          email = value;
-        }
-        setState(() {});
-      },
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,15 +29,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: EdgeInsets.all(18.sp),
         child: Column(
           children: [
-            InkWell(
-              onTap: () {
-                //Todo: Add profile screen navigation here
+            BlocBuilder<ProfileCubit, ProfileState>(
+              builder: (context, state) {
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, kEditProfileScreen);
+                  },
+                  child: SettingsAccountData(
+                    firstName: BlocProvider.of<ProfileCubit>(context).oldFirstName,
+                    lastName: BlocProvider.of<ProfileCubit>(context).oldLastName,
+                    email: BlocProvider.of<ProfileCubit>(context).emailController.text,
+                  ),
+                );
               },
-              child: SettingsAccountData(
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-              ),
             ),
             SizedBox(
               height: 24.h,
@@ -76,7 +52,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               iconHeight: 14.h,
               iconWidth: 14.h,
               onTap: () {
-                //Todo: Add profile screen navigation here
+                    Navigator.pushNamed(context, kEditProfileScreen);
               },
             ),
             const Divider(),

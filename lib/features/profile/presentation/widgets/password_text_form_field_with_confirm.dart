@@ -21,9 +21,11 @@ class _PasswordTextFormFieldWithConfirmState
   Widget build(BuildContext context) {
     return PasswordStrengthFormChecker(
       needConfirmation: true,
+      
       confirmationTextFormFieldConfiguration: TextFormFieldConfiguration(
         textInputAction: TextInputAction.done,
-        controller: widget.controller,
+        controller: widget.confirmController,
+        
         obscureText: obscureTextConfirm,
         decoration: InputDecoration(
           labelText: 'Confirm Password',
@@ -41,6 +43,7 @@ class _PasswordTextFormFieldWithConfirmState
               color: Colors.grey[600],
             ),
           ),
+          
           floatingLabelStyle: TextStyle(
             color: Colors.green[900],
           ),

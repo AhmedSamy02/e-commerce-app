@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:simple_ecommerce/core/constants/assets.dart';
 import 'package:simple_ecommerce/core/constants/widgets/auth_normal_button.dart';
 import 'package:simple_ecommerce/features/auth/presentation/widgets/password_text_form_field.dart';
-import 'package:simple_ecommerce/features/profile/presentation/widgets/password_text_form_field_with_confirm.dart';
+import 'package:simple_ecommerce/features/auth/presentation/widgets/password_with_checker.dart';
+import 'package:simple_ecommerce/features/profile/presentation/controllers/profile_cubit.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final oldPasswordController = TextEditingController();
-    final newPasswordController = TextEditingController();
-    final confirmNewPasswordController = TextEditingController();
+    final controller = BlocProvider.of<ProfileCubit>(context);
+    final oldPasswordController = controller.oldPasswordController;
+    final newPasswordController = controller.newPasswordController;
+    final confirmNewPasswordController = controller.confirmNewPasswordController;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -48,20 +51,31 @@ class ChangePasswordScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     PasswordTextFormField(
-                      textInputAction: TextInputAction.next,
+                      textInputAction: TextInputAction.done,
                       controller: oldPasswordController,
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    PasswordTextFormFieldWithConfirm(
-                      controller: newPasswordController,
-                      confirmController: confirmNewPasswordController,
+                      labelText: 'Old Password',
                     ),
                     SizedBox(
                       height: 20.h,
                     ),
-                    MainNormalButton(text: 'Apply', onPressed: () {}),
+                    PasswordWithChecker(
+                      controller: newPasswordController,
+                      labelText: 'New Password',
+                      textInputAction: TextInputAction.done,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    PasswordTextFormField(
+                      textInputAction: TextInputAction.done,
+                      controller: confirmNewPasswordController,
+                      labelText: 'Confirm Password',
+                    ),SizedBox(
+                      height: 20.h,
+                    ),
+                    MainNormalButton(text: 'Apply', onPressed: () {
+                      BlocProvider.of<ProfileCubit>(context).changePassword(context);
+                    }),
                   ],
                 ),
               )

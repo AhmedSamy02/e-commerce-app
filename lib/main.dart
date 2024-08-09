@@ -15,6 +15,8 @@ import 'package:simple_ecommerce/features/landing_screen.dart';
 import 'package:simple_ecommerce/features/order_history/presentation/controllers/order_history_cubit.dart';
 import 'package:simple_ecommerce/features/order_history/presentation/screens/order_details_screen.dart';
 import 'package:simple_ecommerce/features/order_history/presentation/screens/order_history_screen.dart';
+import 'package:simple_ecommerce/features/profile/domain/repositories/profile_repo.dart';
+import 'package:simple_ecommerce/features/profile/presentation/controllers/profile_cubit.dart';
 import 'package:simple_ecommerce/features/profile/presentation/screens/change_password_screen.dart';
 import 'package:simple_ecommerce/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:simple_ecommerce/features/shop/presentation/controllers/shop_cubit.dart';
@@ -44,7 +46,11 @@ class MainApp extends StatelessWidget {
           ),
           BlocProvider<OrderHistoryCubit>(
             create: (context) => OrderHistoryCubit(),
-          )
+          ),
+          BlocProvider<ProfileCubit>(
+            create: (context) => ProfileCubit(getit.get<ProfileRepository>())
+              ..initializeControllers(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -62,10 +68,10 @@ class MainApp extends StatelessWidget {
             kOrderHistoryScreen: (context) => const OrderHistoryScreen(),
             kOrderDetailsScreen: (context) => const OrderDetailsScreen(),
             kSplashScreen: (context) => const SplashScreen(),
-            kEditProfileScreen:(context)=>const EditProfileScreen(),
-            kChangePasswordScreen:(context)=>const ChangePasswordScreen(),
+            kEditProfileScreen: (context) => const EditProfileScreen(),
+            kChangePasswordScreen: (context) => const ChangePasswordScreen(),
           },
-          initialRoute: kEditProfileScreen,
+          initialRoute: kHomeScreen,
         ),
       ),
     );

@@ -3,9 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PasswordTextFormField extends StatefulWidget {
   const PasswordTextFormField(
-      {super.key, required this.textInputAction, required this.controller});
+      {super.key,
+      required this.textInputAction,
+      required this.controller,
+      this.labelText});
   final TextInputAction textInputAction;
   final TextEditingController controller;
+  final String? labelText;
   @override
   State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
 }
@@ -20,7 +24,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
       obscureText: obscureText,
       cursorColor: Colors.green[900],
       decoration: InputDecoration(
-        labelText: 'Password',
+        labelText: widget.labelText ?? 'Password',
         hintText: 'Enter your password',
         suffixIcon: IconButton(
           onPressed: () {

@@ -3,8 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 
 class PasswordWithChecker extends StatefulWidget {
-  const PasswordWithChecker({super.key, required this.controller});
+  const PasswordWithChecker(
+      {super.key, required this.controller, this.labelText, this.textInputAction});
   final TextEditingController controller;
+  final String? labelText;
+  final TextInputAction? textInputAction;
   @override
   State<PasswordWithChecker> createState() => _PasswordWithCheckerState();
 }
@@ -15,11 +18,11 @@ class _PasswordWithCheckerState extends State<PasswordWithChecker> {
   Widget build(BuildContext context) {
     return PasswordStrengthFormChecker(
       textFormFieldConfiguration: TextFormFieldConfiguration(
-        textInputAction: TextInputAction.done,
+        textInputAction:widget.textInputAction?? TextInputAction.done,
         controller: widget.controller,
         obscureText: obscureText,
         decoration: InputDecoration(
-          labelText: 'Password',
+          labelText: widget.labelText ?? 'Password',
           hintText: 'Enter your password',
           suffixIcon: IconButton(
             onPressed: () {

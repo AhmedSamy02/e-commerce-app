@@ -2,11 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:simple_ecommerce/core/constants/values.dart';
 import 'package:simple_ecommerce/core/errors/failure.dart';
 
-
 class ServerFailure extends Failure {
   ServerFailure(String message) : super(message: message);
   factory ServerFailure.fromDio(DioException e) {
-    logger.e('Server Failure : $e');
+    logger.e('Server Failure : ${e.message ?? e.error}');
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
         return ServerFailure('Connection Timeout');
