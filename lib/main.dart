@@ -15,6 +15,7 @@ import 'package:simple_ecommerce/features/landing_screen.dart';
 import 'package:simple_ecommerce/features/order_history/presentation/screens/order_details_screen.dart';
 import 'package:simple_ecommerce/features/order_history/presentation/screens/order_history_screen.dart';
 import 'package:simple_ecommerce/features/shop/presentation/screens/product_details_screen.dart';
+import 'package:simple_ecommerce/features/splash_screen.dart';
 
 void main() async {
   await initializeHive();
@@ -46,8 +47,9 @@ class MainApp extends StatelessWidget {
             kOrderFailedScreen: (context) => const OrderFailedScreen(),
             kOrderHistoryScreen: (context) => const OrderHistoryScreen(),
             kOrderDetailsScreen: (context) => const OrderDetailsScreen(),
+            kSplashScreen : (context) => const SplashScreen(),
           },
-          initialRoute: kHomeScreen,
+          initialRoute: kSplashScreen,
         ),
       ),
     );

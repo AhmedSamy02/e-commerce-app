@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:simple_ecommerce/core/constants/assets.dart';
 import 'package:simple_ecommerce/core/constants/colors.dart';
 import 'package:simple_ecommerce/features/shop/data/models/product.dart';
 import 'package:simple_ecommerce/features/shop/presentation/controllers/shop_cubit.dart';
@@ -31,7 +33,8 @@ class _ShopScreenState extends State<ShopScreen> {
         ),
         color: kMainGreen,
         child: PagedGridView(
-          pagingController: BlocProvider.of<ShopCubit>(context).pagingController,
+          pagingController:
+              BlocProvider.of<ShopCubit>(context).pagingController,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 14.h,
@@ -39,9 +42,26 @@ class _ShopScreenState extends State<ShopScreen> {
             childAspectRatio: 0.58.sp,
           ),
           builderDelegate: PagedChildBuilderDelegate<Product>(
-            itemBuilder: (context, item, index) => ProductGridItem(product: item),
+            firstPageProgressIndicatorBuilder: (context) => const Center(
+              child: SpinKitFadingCircle(color: kMainGreen),
+            ),
+            noItemsFoundIndicatorBuilder: (context) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(kFailedAlertAsset),
+                SizedBox(height: 24.h),
+                Text(
+                  'No items found',
+                  style: TextStyle(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+            itemBuilder: (context, item, index) =>
+                ProductGridItem(product: item),
           ),
-          
         ),
       ),
     );
