@@ -1,14 +1,14 @@
-# AUVNET Internship Assessment
+# E-commerce App
 
-It's a simple e-commerce application all implemented in clean architecture and applying SOLID princples
+It's a simple e-commerce application all implemented in clean architecture and applying SOLID principles
 
 ## ➕ Features
 
-- User authentication/registeration
+- User authentication/registration
 - Product Browsing
 - Local Shopping Cart
 - Checkout
-- User Profile Managment
+- User Profile Management
 - Order History
 - Responsive Design for mobile and desktop devices
 - Error Handling and Logging
@@ -17,7 +17,7 @@ It's a simple e-commerce application all implemented in clean architecture and a
 ## ⏬ Installation
 
 ```bash
-git clone https://github.com/AhmedSamy02/AUVNET-Internship-Assessment
+git clone https://github.com/AhmedSamy02/e-commerce-app
 flutter pub get
 ```
 
